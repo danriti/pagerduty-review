@@ -1,0 +1,5 @@
+FROM node:4-onbuild
+
+ENV PRODUCTION=1
+
+EXPOSE 8080
