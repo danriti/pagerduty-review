@@ -1,7 +1,7 @@
 {
-  "name": "essential-react",
-  "version": "0.4.0",
-  "description": "A minimal skeleton for building testable React apps using Babel",
+  "name": "pagerduty-review",
+  "version": "0.1.0",
+  "description": "Review your on call rotation in Pagerduty ",
   "main": "src/main.js",
   "scripts": {
     "postinstall": "npm run build",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pheuter/essential-react.git"
+    "url": "https://github.com/danriti/pagerduty-review.git"
   },
   "keywords": [
     "skeleton",
@@ -22,12 +22,12 @@
     "react",
     "quickstart"
   ],
-  "author": "Mark Fayngersh",
+  "author": "Dan Riti",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/pheuter/essential-react/issues"
+    "url": "https://github.com/danriti/pagerduty-review/issues"
   },
-  "homepage": "https://github.com/pheuter/essential-react",
+  "homepage": "https://github.com/danriti/pagerduty-review",
   "devDependencies": {
     "autoprefixer": "^6.0.2",
     "ava": "^0.12.0",
