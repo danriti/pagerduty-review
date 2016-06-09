@@ -57,6 +57,10 @@ export default class Incident {
     return Incident.formatTimestamp(this.created);
   }
 
+  /**
+   * intentially formatting of timestamps to EST due to team's operating
+   * schedule. if someone has a good reason to change this, go ahead!
+   */
   static formatTimestamp(timestamp) {
     return moment(timestamp)
       .tz('America/New_York')

@@ -47,16 +47,16 @@ class IncidentItem extends React.Component {
     let incident = this.props.incident,
         timeOpenNote = `open for ${incident.timeOpen()}`;
 
-    if (this.state.notes) {
-      return [timeOpenNote].concat(
-        this.state.notes.map(m => m.content)
-      );
-    } else {
+    if (!this.state.notes) {
       return [
         timeOpenNote,
         <a onClick={() => this.fetchNotes()}>Load notes</a>
       ];
     }
+
+    return [timeOpenNote].concat(
+      this.state.notes.map(m => m.content)
+    );
   }
 
   render() {

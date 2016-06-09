@@ -109,13 +109,9 @@ export default class Incidents extends React.Component {
 
   render() {
     var incidents = this.incidents(),
-        IncidentsCmp;
-
-    if (this.state.displayView === VIEW_TABLE) {
-      IncidentsCmp = <IncidentTable incidents={incidents} {...this.props} />;
-    } else {
-      IncidentsCmp = <IncidentList incidents={incidents} {...this.props} />;
-    }
+        IncidentsCmp = this.state.displayView === VIEW_TABLE ?
+          <IncidentTable incidents={incidents} {...this.props} /> :
+          <IncidentList incidents={incidents} {...this.props} />;
 
     return (
       <div className="container-fluid">
@@ -125,7 +121,6 @@ export default class Incidents extends React.Component {
         </div>
 
         <div className="row">
-
           <div className="col-md-3">
             <div className="form-group">
               <label>Start Date</label>
@@ -140,29 +135,29 @@ export default class Incidents extends React.Component {
                        onChange={(e) => this.handleCheckbox(e)} /> Exclude alerts during business hours
               </label>
             </div>
-
           </div>
-
         </div>
 
         <IncidentStatisticsTable incidents={incidents} {...this.props} />
 
         <div>
           <h3>Incidents</h3>
-            <div className="form-group">
-              <div className="btn-group" role="group">
-                <button type="button"
-                        className="btn btn-default"
-                        onClick={(e) => this.handleDisplayChange(e, VIEW_TABLE)}>
-                  Table
-                </button>
-                <button type="button"
-                        className="btn btn-default"
-                        onClick={(e) => this.handleDisplayChange(e, VIEW_LIST)}>
-                  List
-                </button>
-              </div>
+
+          <div className="form-group">
+            <div className="btn-group" role="group">
+              <button type="button"
+                      className="btn btn-default"
+                      onClick={(e) => this.handleDisplayChange(e, VIEW_TABLE)}>
+                Table
+              </button>
+              <button type="button"
+                      className="btn btn-default"
+                      onClick={(e) => this.handleDisplayChange(e, VIEW_LIST)}>
+                List
+              </button>
             </div>
+          </div>
+
           {IncidentsCmp}
         </div>
 
