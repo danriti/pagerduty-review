@@ -116,7 +116,7 @@ class IncidentLogEntriesGrid extends React.Component {
                 <div className={panelClasses}>
                   <div className="panel-heading">
                     <strong>
-                      {moment(logEntry.created_at).format('YYYY/MM/DD LTS')}
+                      {Incident.formatTimestamp(logEntry.created_at)}
                     </strong>{' '}
                     <span>{logEntry.type}</span>{' '}
                     <span>{user}</span>

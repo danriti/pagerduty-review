@@ -54,7 +54,11 @@ export default class Incident {
   }
 
   createdTimestamp() {
-    return moment(this.created)
+    return Incident.formatTimestamp(this.created);
+  }
+
+  static formatTimestamp(timestamp) {
+    return moment(timestamp)
       .tz('America/New_York')
       .format(TIMESTAMP_FORMAT);
   }

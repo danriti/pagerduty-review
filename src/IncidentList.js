@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment-timezone';
 
 import pagerduty from './pagerduty';
 
@@ -7,7 +8,7 @@ export default class IncidentList extends React.Component {
   render() {
     return (
       <div>
-        <div>2016-XX-XX YourName -> NextName</div>
+        <div>{moment().format('YYYY-MM-DD')} YourName -> NextName</div>
 
         <ul>
           {this.props.incidents.map((incident, i) => {

@@ -141,10 +141,15 @@ export default class Incidents extends React.Component {
               </label>
             </div>
 
+          </div>
+
+        </div>
+
+        <IncidentStatisticsTable incidents={incidents} {...this.props} />
+
+        <div>
+          <h3>Incidents</h3>
             <div className="form-group">
-              <div>
-                <label>Display</label>
-              </div>
               <div className="btn-group" role="group">
                 <button type="button"
                         className="btn btn-default"
@@ -158,14 +163,6 @@ export default class Incidents extends React.Component {
                 </button>
               </div>
             </div>
-          </div>
-
-        </div>
-
-        <IncidentStatisticsTable incidents={incidents} {...this.props} />
-
-        <div>
-          <h3>Incidents</h3>
           {IncidentsCmp}
         </div>
 
