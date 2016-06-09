@@ -2,7 +2,7 @@ import moment from 'moment-timezone';
 import React from 'react';
 
 
-const TIMESTAMP_FORMAT = 'dddd YYYY/MM/DD LT';
+const TIMESTAMP_FORMAT = 'dddd YYYY/MM/DD LT zz';
 
 
 export default class Incident {
@@ -51,5 +51,19 @@ export default class Incident {
     isBefore = hour < 13; // before 9am EST
 
     return isWeekend || (isAfter || isBefore);
+  }
+
+  createdTimestamp() {
+    return Incident.formatTimestamp(this.created);
+  }
+
+  /**
+   * intentially formatting of timestamps to EST due to team's operating
+   * schedule. if someone has a good reason to change this, go ahead!
+   */
+  static formatTimestamp(timestamp) {
+    return moment(timestamp)
+      .tz('America/New_York')
+      .format(TIMESTAMP_FORMAT);
   }
 }

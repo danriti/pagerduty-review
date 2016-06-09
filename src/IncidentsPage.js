@@ -4,12 +4,15 @@ import React from 'react';
 
 import history from './history';
 import Incident from './incident';
+import IncidentList from './IncidentList';
 import IncidentTable from './IncidentTable';
 import IncidentStatisticsTable from './IncidentStatistics';
 import pagerduty from './pagerduty';
 
 
 const HASH_FORMAT = 'YYYY-MM-DD';
+const VIEW_TABLE = 0;
+const VIEW_LIST = 1;
 
 
 export default class Incidents extends React.Component {
@@ -19,7 +22,8 @@ export default class Incidents extends React.Component {
     this.state = {
       incidents: [],
       startDate: moment().subtract(7, 'days'),
-      excludeBusinessHours: false
+      excludeBusinessHours: false,
+      displayView: VIEW_TABLE
     };
   }
 
@@ -75,6 +79,12 @@ export default class Incidents extends React.Component {
     history.navigateTo(this.props.location, {exclude: Number(checked)});
   }
 
+  handleDisplayChange(e, view) {
+    this.setState({
+      displayView: view
+    });
+  }
+
   fetchIncidents(startDate) {
     let { subdomain, token } = this.props.params;
 
@@ -98,7 +108,10 @@ export default class Incidents extends React.Component {
   }
 
   render() {
-    var incidents = this.incidents();
+    var incidents = this.incidents(),
+        IncidentsCmp = this.state.displayView === VIEW_TABLE ?
+          <IncidentTable incidents={incidents} {...this.props} /> :
+          <IncidentList incidents={incidents} {...this.props} />;
 
     return (
       <div className="container-fluid">
@@ -108,7 +121,6 @@ export default class Incidents extends React.Component {
         </div>
 
         <div className="row">
-
           <div className="col-md-3">
             <div className="form-group">
               <label>Start Date</label>
@@ -124,12 +136,30 @@ export default class Incidents extends React.Component {
               </label>
             </div>
           </div>
-
         </div>
 
         <IncidentStatisticsTable incidents={incidents} {...this.props} />
 
-        <IncidentTable incidents={incidents} {...this.props} />
+        <div>
+          <h3>Incidents</h3>
+
+          <div className="form-group">
+            <div className="btn-group" role="group">
+              <button type="button"
+                      className="btn btn-default"
+                      onClick={(e) => this.handleDisplayChange(e, VIEW_TABLE)}>
+                Table
+              </button>
+              <button type="button"
+                      className="btn btn-default"
+                      onClick={(e) => this.handleDisplayChange(e, VIEW_LIST)}>
+                List
+              </button>
+            </div>
+          </div>
+
+          {IncidentsCmp}
+        </div>
 
       </div>
     );
