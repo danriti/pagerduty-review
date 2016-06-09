@@ -12,45 +12,39 @@ export default class IncidentTable extends React.Component {
     let { subdomain, token } = this.props.params;
 
     return (
-      <div>
+      <table className="table table-hover">
+        <thead>
+          <tr>
+            <td><strong>incident</strong></td>
+            <td><strong>created</strong></td>
+            <td><strong>log</strong></td>
+            <td><strong>time open</strong></td>
+            <td><strong>key</strong></td>
+          </tr>
+        </thead>
 
-        <h3>Incidents</h3>
+        <tbody>
+          {this.props.incidents.map((incident, i) => {
+            let classes = classNames({
+              'danger': incident.isAfterHours()
+            });
 
-        <table className="table table-hover">
-          <thead>
-            <tr>
-              <td><strong>incident</strong></td>
-              <td><strong>created</strong></td>
-              <td><strong>log</strong></td>
-              <td><strong>time open</strong></td>
-              <td><strong>key</strong></td>
-            </tr>
-          </thead>
-
-          <tbody>
-            {this.props.incidents.map((incident, i) => {
-              let classes = classNames({
-                'danger': incident.isAfterHours()
-              });
-
-              return (
-                <tr className={classes} key={i}>
-                  <td>{incident.idLink()}</td>
-                  <td>{incident.hipchatUrl()}</td>
-                  <td>
-                    <Link to={`/pd/${subdomain}/${token}/incident/${incident.id}`}>
-                      Incident Log
-                    </Link>
-                  </td>
-                  <td>{incident.timeOpen()}</td>
-                  <td>{incident.key}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-
-      </div>
+            return (
+              <tr className={classes} key={i}>
+                <td>{incident.idLink()}</td>
+                <td>{incident.hipchatUrl()}</td>
+                <td>
+                  <Link to={`/pd/${subdomain}/${token}/incident/${incident.id}`}>
+                    Incident Log
+                  </Link>
+                </td>
+                <td>{incident.timeOpen()}</td>
+                <td>{incident.key}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     );
   }
 }
