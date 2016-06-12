@@ -70,8 +70,6 @@ export default class Incidents extends React.Component {
   handleCheckbox(e, override=false) {
     let checked = (e && e.target && e.target.checked) || override;
 
-    console.log('checked', checked);
-
     this.setState({
       excludeBusinessHours: checked
     });
