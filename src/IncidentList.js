@@ -43,6 +43,11 @@ class IncidentItem extends React.Component {
     });
   }
 
+  format(note, incident) {
+    let later = moment(note.created_at).from(moment(incident.created), true);
+    return `(${later} after) ${note.content}`
+  }
+
   notes() {
     let incident = this.props.incident,
         timeOpenNote = `open for ${incident.timeOpen()}`;
@@ -55,7 +60,9 @@ class IncidentItem extends React.Component {
     }
 
     return [timeOpenNote].concat(
-      this.state.notes.map(m => m.content)
+      this.state.notes
+        .sort((a, b) => moment(a.created_at) - moment(b.created_at))
+        .map(n => this.format(n, this.props.incident))
     );
   }
 
